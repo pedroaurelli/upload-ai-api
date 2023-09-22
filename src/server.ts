@@ -1,10 +1,17 @@
 import { fastify } from 'fastify'
+import { promptsController } from './controllers/prompts-controller'
+import { videoController } from './controllers/video-controller'
+import { aiCompleteController } from './controllers/ai-complete-controller'
+import fastifyCors from '@fastify/cors'
 
 const app = fastify()
 
-app.get('/', () => {
-  return 'Hello World!'
+app.register(fastifyCors, {
+  origin: '*'
 })
+app.register(promptsController)
+app.register(videoController)
+app.register(aiCompleteController)
 
 app
   .listen({
